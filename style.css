@@ -1,0 +1,19 @@
+body {
+    font-family: sans-serif, Arial;
+    background-color: lightgoldenrodyellow
+}
+
+main {
+   text-align: center;
+   background-color: lightskyblue;
+}
+
+#image {
+    display: inline-block;
+    width: 20%;
+    height: 20%;
+}
+
+input {
+    margin
+}
