@@ -1,20 +1,59 @@
-<DOCTYPE! html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Word Scramble</title>
-        <link rel="stylesheet" href="style.css">
-        <meta name="description" content="A mind twisting word scramble game">
-        <meta name="keywords" content="word, scramble, game, puzzle, fun">
-    </head>
-    <body>
-        <main>
-            <h1>Word Scramble Game</h1>
-            <img id="image" src="wordScrambleIcon.png" alt="word scramble icon">
-            <p>Uscramble the words correctly to gain points! The more points the better!</p>
-            <a href="game.html"> <button id="start-button" type="button">Start Game</button> </a>
-            </div>
-        </main>
-    </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PyScript Hello</title>
+
+  <!-- Pin to a known-good PyScript release -->
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.10.2/core.css" />
+  <script type="module" src="https://pyscript.net/releases/2024.10.2/core.js"></script>
+
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 16px; }
+    #out { padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 80px; }
+    .io { margin-top: 12px; display: flex; gap: 8px; }
+    .io input { padding: 8px; }
+    .io button { padding: 8px 12px; }
+  </style>
+</head>
+<body>
+  <h1>PyScript sanity check</h1>
+
+  <div id="out"></div>
+
+  <div class="io">
+    <input id="answer" placeholder="type here" />
+    <button id="submit-btn">Submit</button>
+  </div>
+
+  <py-script output="out">
+from js import document
+import asyncio
+
+async def ask(prompt=""):
+    print(prompt, end="")
+    box = document.getElementById("answer")
+    box.value = ""
+    box.focus()
+    loop = asyncio.get_event_loop()
+    fut = loop.create_future()
+
+    def on_click(_):
+        if not fut.done():
+            fut.set_result(box.value)
+
+    document.getElementById("submit-btn").addEventListener("click", on_click, {"once": True})
+    val = await fut
+    print(val)  # echo
+    return val
+
+async def main():
+    print("PyScript is running ✅\\n")
+    name = await ask("What's your name? ")
+    print(f"Hello, {name}! In-page input works.\\n")
+
+asyncio.create_task(main())
+  </py-script>
+</body>
 </html>
