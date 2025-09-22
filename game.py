@@ -1,13 +1,12 @@
 from pyscript import Element
-#makes the input
+#makes the input function work in the browser
 import builtins, js
-def browser_input(prompt=''):
+def browser_input(prompt=""):
     ans = js.window.prompt(str(prompt))
     return '' if ans is None else str(ans)
 builtins.input = browser_input
 
 #python code begins
-#I worked with a classmate on this code 
 import random 
 import time 
 wordLists = [ 
@@ -20,7 +19,7 @@ bonusList = [
     ["planet", "silver", "singer", "forest", "branch", "danger", "friend", "stream", "artist", "circle"], 
     ["husband", "morning", "blanket", "cabinet", "teacher", "picture", "fortune", "airport", 
 "kingdom", "journey"], 
-] 
+]
  
 def scramble(listNumber, index, scrambleList): 
     word = scrambleList[listNumber].pop(index) 
@@ -57,12 +56,10 @@ score = 0
 attempts = 0 
 wordsMain = 0 
  
-print( 
-    "Welcome to the word scramble guessing game! You will have five attempts to" \ 
+print("Welcome to the word scramble guessing game! You will have five attempts to" \ 
     " correctly unscramble one three letter word, one four letter word, and one" \ 
     " five letter word. If you complete this task, you will have the option to" \ 
-    " participate in a bonus game to improve your score. Good luck!" 
-) 
+    " participate in a bonus game to improve your score. Good luck!") 
 print("") 
 while(True): 
     user_input = input("Type 'ready' to continue: ").strip().lower() 
@@ -96,18 +93,14 @@ while (attempts < 5):
         break 
      
 if (listNumber == 3): 
-    print ( 
-        "Congratulations, you win! Enter 'one' if you would like to play a bonus game." \ 
-        " Enter 'two' if you would not like to participate." 
-        ) 
+    print ("Congratulations, you win! Enter 'one' if you would like to play a bonus game." \ 
+        " Enter 'two' if you would not like to participate.") 
          
     bonusGame = input().strip().lower() 
     print ("") 
     while ((bonusGame != 'one') and (bonusGame != 'two')): 
-        print ( 
-            "Invalid input. Enter 'one' if you would like to play a bonus game." \ 
-            " Enter 'two' if you would not like to participate." 
-            ) 
+        print ("Invalid input. Enter 'one' if you would like to play a bonus game." \ 
+            " Enter 'two' if you would not like to participate.") 
         bonusGame = input().strip().lower() 
         print("") 
 else: 
@@ -133,9 +126,6 @@ else:
         else: 
             print ("Incorrect, the correct word is:", correctGuess) 
             print ("") 
-
-
-
             break 
          
         print ("") 
