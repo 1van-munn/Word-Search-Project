@@ -14,33 +14,33 @@
   </div>
 
   <py-script output="out">
-  from js import document
-  import asyncio
+from js import document
+import asyncio
 
-  async def ask(prompt=""):
-      print(prompt, end="")
-      box = document.getElementById("answer")
-      box.value = ""
-      box.focus()
+async def ask(prompt=""):
+    print(prompt, end="")
+    box = document.getElementById("answer")
+    box.value = ""
+    box.focus()
 
-      loop = asyncio.get_event_loop()
-      fut = loop.create_future()
+    loop = asyncio.get_event_loop()
+    fut = loop.create_future()
 
-      def on_click(_):
-          if not fut.done():
-              fut.set_result(box.value)
+    def on_click(_):
+        if not fut.done():
+            fut.set_result(box.value)
 
-      document.getElementById("submit-btn").addEventListener("click", on_click, {"once": True})
-      val = await fut
-      print(f"You typed: {val}")
-      return val
+    document.getElementById("submit-btn").addEventListener("click", on_click, {"once": True})
+    val = await fut
+    print(f"You typed: {val}")
+    return val
 
-  async def main():
-      print("PyScript is running ✅")
-      name = await ask("Your name: ")
-      print(f"Hello, {name}! 👋")
+async def main():
+    print("PyScript is running ✅")
+    name = await ask("Your name: ")
+    print(f"Hello, {name}! 👋")
 
-  asyncio.create_task(main())
+asyncio.create_task(main())
   </py-script>
 </body>
 </html>
