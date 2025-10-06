@@ -1,56 +1,24 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>PyScript OK</title>
-  <link rel="stylesheet" href="https://pyscript.net/releases/2024.10.2/core.css">
-  <script type="module" src="https://pyscript.net/releases/2024.10.2/core.js"></script>
-</head>
-<body>
-  <style>
-  #out {
-    min-height: 120px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-family: monospace;
-    white-space: pre-wrap;
-  }
-</style>
-  <div id="out"></div>
-  <div class="io">
-    <input id="answer" placeholder="type here">
-    <button id="submit-btn">Submit</button>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Scramble</title>
+    <meta name="description" content="A mind-twisting word scramble game" />
+    <meta name="keywords" content="word, scramble, game, puzzle, fun" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  <py-script output="out">
-from js import document
-import asyncio
-
-async def ask(prompt=""):
-    print(prompt, end="")
-    box = document.getElementById("answer")
-    box.value = ""
-    box.focus()
-
-    loop = asyncio.get_event_loop()
-    fut = loop.create_future()
-
-    def on_click(_):
-        if not fut.done():
-            fut.set_result(box.value)
-
-    document.getElementById("submit-btn").addEventListener("click", on_click, {"once": True})
-    val = await fut
-    print(f"You typed: {val}")
-    return val
-
-async def main():
-    print("PyScript is running ✅")
-    name = await ask("Your name: ")
-    print(f"Hello, {name}! 👋")
-
-asyncio.create_task(main())
-  </py-script>
-</body>
+  <body>
+    <main class="landing-container">
+      <h1>Word Scramble Game</h1>
+      <p>
+        Unscramble the words correctly to gain points!<br />
+        The faster you solve them, the higher your score.
+      </p>
+      <a href="game.html">
+        <button id="start-button" type="button">Start Game</button>
+      </a>
+    </main>
+  </body>
 </html>
